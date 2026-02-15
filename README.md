@@ -1,4 +1,4 @@
-# Addon Template
+# Minecraft Addon Template
 
 [日本語版 README はこちら](https://github.com/shizuku86/addon-template/blob/main/README-ja.md)
 

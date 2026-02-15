@@ -35,36 +35,36 @@ RP/   # Resource Pack
 
 1. 依存関係のインストール
 
-pnpm を使用する場合（推奨）：
+    pnpm を使用する場合（推奨）：
 
-```
-pnpm install
-```
+    ```
+    pnpm install
+    ```
+    
+    npm を使用する場合:
 
-npm を使用する場合:
-
-```
-npm install
-```
+    ```
+    npm install
+    ```
 
 2. プロパティの設定
 
-`scripts/properties.ts` 内の `#` が付いている箇所を編集してください。
-その後、TypeScript のエラーが無いことを確認してください。
+    `scripts/properties.ts` 内の `#` が付いている箇所を編集してください。
+    その後、TypeScript のエラーが無いことを確認してください。
 
 3. Addon のビルド
 
-pnpm を使用する場合
+    pnpm を使用する場合
 
-```
-pnpm build
-```
+    ```
+    pnpm build
+    ```
 
-npm を使用する場合
+    npm を使用する場合
 
-```
-npm run build
-```
+    ```
+    npm run build
+    ```
 
 ### ビルドコマンドの動作内容
 

@@ -1,39 +1,61 @@
-# Kairo-template
+# Addon Template
 
-This repository is a template based on the specifications of the Kairo addon linked below.  
-https://github.com/shizuku86/Kairo
+[日本語版 README はこちら](https://github.com/shizuku86/addon-template/blob/main/README-ja.md)
+
+This repository is a template for developing Minecraft Bedrock Addons.
+
+---
+
+## Project Structure
+
+This template uses the standard Bedrock Addon structure with two root-level directories:
+
+- `BP/` (Behavior Pack)
+- `RP/` (Resource Pack)
+
+These folders are automatically created when you run `npm run build` for the first time.
+
+After they are generated, you can develop your addon normally by placing behavior pack and resource pack assets inside `BP/` and `RP/`.
+
+---
+
+## Getting Started
 
 After cloning, run the following command to install node_modules:
 
-- npm install
+- `npm install`
 
-After editing the lines ending with # in scripts/properties.ts appropriately and resolving errors,  
-execute the following command in the terminal:
+Next, edit the lines marked with `#` in `scripts/properties.ts` and resolve any TypeScript errors.
+Then run:
 
-- npm run build
+- `npm run build`
 
-When this command is executed, the following operations will be performed:
+### What `npm run build` Does
 
-- manifest.json is automatically generated in BP/ and RP/ from the information in properties
-- TypeScript files in scripts/ are built as JavaScript into BP/scripts
-- The pack_icon.png at the project root is copied into both BP/ and RP/
-- The completed BP/ and RP/ are copied into Minecraft’s development folder
+Running the build command will:
+
+- Automatically generate `manifest.json` in both BP/ and RP/ based on `properties.ts`
+- Compile TypeScript files in `scripts/` into JavaScript under `BP/scripts/`
+- Copy `pack_icon.png` from the project root into both BP/ and RP/
+- Copy the completed `BP/` and `RP/` into Minecraft’s development folder
 
 ## Requirements
 
 - Node.js (for development and TypeScript build)
 
-## Setup && Build
+## Minecraft Modules
 
-1. Install dependencies:
-    ```bash
-    npm install
-    ```
-2. Deploy
-    ```bash
-    npm run build
-    ```
-3. Auto-deploy on file change:
-    ```bash
-    npm run dev
-    ```
+The following Minecraft modules are defined in `package.json`:
+
+- `@minecraft/server`: `^2.5.0`
+- `@minecraft/server-ui`: `^2.0.0`
+
+Other available Minecraft modules include:
+
+- `@minecraft/common`
+- `@minecraft/math`
+- `@minecraft/server-admin`
+- `@minecraft/server-editor`
+- `@minecraft/server-gametest`
+- `@minecraft/server-net`
+- `@minecraft/vanilla-data`

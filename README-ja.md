@@ -1,4 +1,4 @@
-# Addon Template
+# Minecraft Addon Template
 
 [English README is here](README.md)
 

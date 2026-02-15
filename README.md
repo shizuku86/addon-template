@@ -2,59 +2,115 @@
 
 [日本語版 README はこちら](https://github.com/shizuku86/addon-template/blob/main/README-ja.md)
 
-This repository is a template for developing Minecraft Bedrock Addons.
+This repository is a template for developing Minecraft Bedrock Addons using the Stable Script API.
+
+It provides:
+
+- Automated manifest generation
+- TypeScript + esbuild bundling
+- Automatic deployment to the Minecraft development directory
 
 ---
 
 ## Project Structure
 
-This template uses the standard Bedrock Addon structure with two root-level directories:
+This template follows the standard Bedrock Addon layout:
 
-- `BP/` (Behavior Pack)
-- `RP/` (Resource Pack)
+```
+BP/   # Behavior Pack
+RP/   # Resource Pack
+```
 
-These folders are automatically created when you run `npm run build` for the first time.
+These directories are automatically generated when running the build command for the first time.
 
-After they are generated, you can develop your addon normally by placing behavior pack and resource pack assets inside `BP/` and `RP/`.
+After generation, you can place:
+
+- Behavior pack assets in BP/
+- Resource pack assets in RP/
+- Script source files in scripts/
 
 ---
 
 ## Getting Started
 
-After cloning, run the following command to install node_modules:
+1. Install dependencies
+   If using pnpm (recommended):
 
-- `npm install`
+```
+pnpm install
+```
 
-Next, edit the lines marked with `#` in `scripts/properties.ts` and resolve any TypeScript errors.
-Then run:
+If using npm:
 
-- `npm run build`
+```
+npm install
+```
 
-### What `npm run build` Does
+1. Configure properties
 
-Running the build command will:
+Edit the lines marked with `#` in `scripts/properties.ts`.
+Resolve any TypeScript errors before proceeding.
 
-- Automatically generate `manifest.json` in both BP/ and RP/ based on `properties.ts`
-- Compile TypeScript files in `scripts/` into JavaScript under `BP/scripts/`
-- Copy `pack_icon.png` from the project root into both BP/ and RP/
-- Copy the completed `BP/` and `RP/` into Minecraft’s development folder
+3. Build the Addon
+
+If using pnpm:
+
+```
+pnpm build
+```
+
+If using npm:
+
+```
+npm run build
+```
+
+### What the Build Command Does
+
+Running the build command performs the following:
+
+- Generates `manifest.json` for both BP/ and RP/ using `properties.ts`
+- Bundles all TypeScript files into a single `index.js`
+- Outputs compiled scripts to:
+    ```
+    BP/scripts/index.js
+    ```
+- Copies `pack_icon.png` from the project root into both BP/ and RP/
+- Deploys `BP/` and `RP/` into Minecraft’s development folder (Windows only)
+
+## Using Script API Beta Versions
+
+This template is configured to use Stable Script API modules by default.
+If you want to use Beta (Preview) Script API modules, you must manually update the versions in `package.json`.
+For example:
+
+```
+"@minecraft/server": "1.0.0-beta.x.x.x-preview.x"
+```
+
+After modifying package.json, reinstall dependencies.
 
 ## Build System
 
-This template uses `esbuild` to bundle all TypeScript entry points into a single `index.js` file under `BP/scripts/`.
+This template uses:
+
+- **TypeScript** for type checking (tsc --noEmit)
+- **esbuild** for fast bundling
+
+All entry points inside scripts/ are bundled into a single optimized output file.
 
 ## Requirements
 
-- Node.js (for development and TypeScript build)
+- Node.js (v18+ recommended)
 
 ## Minecraft Modules
 
-The following Minecraft modules are defined in `package.json`:
+The following modules are configured in `package.json`:
 
 - `@minecraft/server`: `^2.5.0`
 - `@minecraft/server-ui`: `^2.0.0`
 
-Other available Minecraft modules include:
+Additional optional modules:
 
 - `@minecraft/common`
 - `@minecraft/debug-utilities`
@@ -69,6 +125,8 @@ Other available Minecraft modules include:
 
 ## Performance Considerations
 
-This template includes `fast-json-stringify` for high-performance JSON serialization.
+This template includes **fast-json-stringify** for high-performance JSON serialization.
 
-When storing objects using `setDynamicProperty()`, it is recommended to serialize them using `fast-json-stringify` instead of `JSON.stringify` for better performance.
+When storing structured data using `setDynamicProperty()`
+
+it is recommended to use fast-json-stringify instead of JSON.stringify() for better performance and predictable schema-based serialization.

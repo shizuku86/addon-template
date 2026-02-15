@@ -2,11 +2,10 @@
     "name": "addon-template",
     "version": "1.0.0",
     "description": "**Stable Script API**\r - @minecraft/server - 2.5.0",
-    "main": "index.js",
     "type": "module",
     "scripts": {
         "typecheck": "tsc --noEmit",
-        "build": "rimraf BP/scripts && npm run typecheck && node build.mjs && npm run deploy",
+        "build": "rimraf BP/scripts && pnpm typecheck && node build.mjs && pnpm deploy",
         "deploy": "node src/deploy.js"
     },
     "repository": {

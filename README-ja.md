@@ -2,7 +2,13 @@
 
 [English README is here](README.md)
 
-このリポジトリは、統合版マインクラフトのアドオンを開発するためのテンプレートです。
+このリポジトリは、安定板の ScriptAPI を使用する統合版マインクラフトのアドオン用テンプレートです。
+
+このテンプレートには以下が含まれます：
+
+- `manifest.json` の自動生成
+- TypeScript + esbuild によるバンドル
+- Minecraft 開発フォルダへの自動デプロイ
 
 ---
 
@@ -10,49 +16,105 @@
 
 このテンプレートでは、ルート直下に以下の2つのディレクトリを作成し使用します。
 
-- `BP/`（Behavior Pack）
-- `RP/`（Resource Pack）
+```
+BP/   # Behavior Pack
+RP/   # Resource Pack
+```
 
 これらのフォルダは、`npm run build` を初めて実行した際に自動生成されます。
-生成後は、`BP/` と `RP/` の中にビヘイビアパックおよびリソースパックのファイルを通常通り記述して開発できます。
+
+生成後は以下のように開発を行います：
+
+- ScriptAPI のコード -> ルート直下の `scripts/` 以下に TypeScript で記述
+- BP のファイル -> ルート直下の `BP/` に scripts 以外を記述
+- RP のファイル -> ルート直下の `RP/` に記述
 
 ---
 
 ## Getting Started
 
-`npm install`
+1. 依存関係のインストール
 
-次に、`scripts/properties.ts` 内の `#` が付いている箇所を適切に編集して、
-TypeScript のエラーが解消するようにしましょう。
+pnpm を使用する場合（推奨）：
 
-その後、以下のコマンドを実行します
-`npm run build`
+```
+pnpm install
+```
 
-### `npm run build` で行われること
+npm を使用する場合:
 
-`npm run build` を実行すると、以下の処理が自動的に行われます。
+```
+npm install
+```
 
-- `properties.ts` の情報を元に、BP/ と RP/ の両方に `manifest.json` を自動生成
-- `scripts/` 内のTypeScript をトランスパイルし、`BP/scripts/` に JavaScript として出力
-- ルート直下の `pack_icon.png` を BP/ と RP/ の両方にコピー
-- 完成した BP/ と RP/ を Minecraft の development フォルダへコピー
+2. プロパティの設定
+
+`scripts/properties.ts` 内の `#` が付いている箇所を編集してください。
+その後、TypeScript のエラーが無いことを確認してください。
+
+3. Addon のビルド
+
+pnpm を使用する場合
+
+```
+pnpm build
+```
+
+npm を使用する場合
+
+```
+npm run build
+```
+
+### ビルドコマンドの動作内容
+
+ビルドを実行すると、以下の処理が行われます：
+
+- `properties.ts` を基に BP/ と RP/ の `manifest.json` を自動生成
+- `scripts/` 内の TypeScript ファイルをすべてバンドル
+- 出力ファイルを以下へ生成：
+    ```
+    BP/scripts/index.js
+    ```
+- プロジェクトルートの `pack_icon.png` を BP/ と RP/ にコピー
+- `BP/` と `RP/` を Minecraft の開発フォルダへデプロイ（Windows のみ対応）
+
+## ScriptAPI の実験版を使用する場合
+
+このテンプレートはデフォルトで 安定板のScriptAPI を使用する設定になっています。
+
+Beta（Preview）版の Script API を使用する場合は、
+`package.json` を自身で編集してください。
+
+例:
+
+```
+"@minecraft/server": "1.0.0-beta.x.x.x-preview.x"
+```
+
+`package.json` を変更した後は、依存関係を再インストールしてください。
 
 ## ビルドシステム
 
-このテンプレートでは、`esbuild` を使用してすべての TypeScript エントリーポイントを `BP/scripts/` 配下の単一の `index.js` ファイルへバンドルしています。
+このテンプレートは以下を使用しています：
+
+- **TypeScript** による型チェック（tsc --noEmit）
+- **esbuild** による高速バンドル
+
+scripts/ 内のすべてのエントリーポイントは、最適化された単一の index.js として出力されます。
 
 ## 動作環境
 
-- Node.js (デプロイとTypeScriptビルド用)
+- Node.js（v18 以上推奨）
 
 ## Minecraft Modules
 
-`package.json` には以下の Minecraft モジュールが含まれています。
+`package.json` には以下のモジュールが定義されています：
 
 - `@minecraft/server`: `^2.5.0`
 - `@minecraft/server-ui`: `^2.0.0`
 
-他にも、以下のモジュールが利用可能です
+その他利用可能なモジュール：
 
 - `@minecraft/common`
 - `@minecraft/debug-utilities`

@@ -25,7 +25,7 @@ RP/   # Resource Pack
 
 生成後は以下のように開発を行います：
 
-- ScriptAPI のコード -> ルート直下の `scripts/` 以下に TypeScript で記述
+- ScriptAPI のコード -> ルート直下の `src/` 以下に TypeScript で記述
 - BP のファイル -> ルート直下の `BP/` に scripts 以外を記述
 - RP のファイル -> ルート直下の `RP/` に記述
 
@@ -43,7 +43,7 @@ RP/   # Resource Pack
 
 2. プロパティの設定
 
-    初期テンプレートの `scripts/properties.ts` には、意図的に不正な `#` マーカーが含まれています。
+    初期テンプレートの `src/properties.ts` には、意図的に不正な `#` マーカーが含まれています。
     `#` が付いている箇所を編集したうえで、TypeScript のエラーが無いことを確認してください。
 
 3. Addon のビルド
@@ -58,7 +58,7 @@ RP/   # Resource Pack
 
 - `properties.ts` を基に BP/ と RP/ の `manifest.json` を自動生成
 - ビルドのたびに `manifest.json` の `patch` バージョンを自動でインクリメント
-- `scripts/` 内の TypeScript ファイルをすべてバンドル
+- `src/` 内の TypeScript ファイルをすべてバンドル
 - 出力ファイルを以下へ生成：
     ```
     BP/scripts/index.js

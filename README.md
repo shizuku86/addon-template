@@ -25,9 +25,9 @@ These directories are automatically generated when running the build command for
 
 After generation, you can place:
 
+- Script source files in src/
 - Behavior pack assets in BP/
 - Resource pack assets in RP/
-- Script source files in scripts/
 
 ---
 
@@ -43,7 +43,7 @@ After generation, you can place:
 
 2. Configure properties
 
-    `scripts/properties.ts` intentionally contains invalid `#` markers in the initial template.
+    `src/properties.ts` intentionally contains invalid `#` markers in the initial template.
     Edit the lines marked with `#`, then confirm there are no TypeScript errors before proceeding.
 
 3. Build the Addon

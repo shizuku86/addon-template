@@ -5,8 +5,8 @@
     "type": "module",
     "scripts": {
         "typecheck": "tsc --noEmit",
-        "build": "rimraf BP/scripts && pnpm typecheck && node build.mjs && pnpm deploy",
-        "deploy": "node src/deploy.js"
+        "build": "rimraf BP/scripts && pnpm typecheck && node .build/build.mjs && pnpm deploy",
+        "deploy": "node .build/deploy.js"
     },
     "repository": {
         "type": "git",
